@@ -1,7 +1,7 @@
 package structure.sort;
 
 /**
- * 插入排序
+ * 插入排序是一种稳定的排序方式, O(n^2)的时间复杂度在数据规模较小时性能优于归并
  */
 public class InsertionSort {
 

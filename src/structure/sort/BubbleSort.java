@@ -1,5 +1,8 @@
 package structure.sort;
 
+/**
+ * 冒泡排序，通过flag=没有数据交换 可以减少比较提前推出
+ */
 public class BubbleSort {
 
 	public void bubbleSort(int[] a) {
