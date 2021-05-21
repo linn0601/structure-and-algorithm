@@ -51,11 +51,8 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 	private Node removeMin(Node node) {
 		if (node.left == null) {
 			Node rightNode = node.right;
-
 			node.right = null;
-
 			size--;
-
 			return rightNode;
 		}
 
@@ -88,14 +85,16 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 		}
 
 		else {
-			// 删除当前的node
+			// 在二叉搜索树中删除，如果没有左子树，就返回右子树并将右子树set null
+
+			// 删除当前的node左子树为null，返回右子树
 			if (node.left == null) {
-				Node right = node.right;
+				Node rightNode = node.right;
 				node.right = null;
 				size--;
-				return right;
+				return rightNode;
 			}
-
+			// 删除当前node右子树为null，返回左子树
 			if (node.right == null) {
 				Node leftNode = node.left;
 				node.left = null;
@@ -103,15 +102,14 @@ public class BSTMap<K extends Comparable<K>, V> implements Map<K, V> {
 				return leftNode;
 			}
 
-			// 带删除即诶单左右子树都不为null
+			// 待删除节点左右子树都不为null
 			// 找到必带删除节点的最小节点，即带删除节点右子树的最小节点
 			// 用这个节点顶替待删除节点的位置
-			Node successor = minimum(node.right);
+			Node successor = minimum(node.right); // 删除节点的 右边取最大值作为继任者
+			successor.right = removeMin(node.right); // 删除右子树中最小值,返回删除后节点给继任者左边
+			successor.left = node.left; // 继任者的左子树=带删除元素的左边
 
-			successor.right = removeMin(node.right);
-			successor.left = node.left;
-
-			node.left = node.right = null;
+			node.left = node.right = null; // set null 方便回收
 
 			return successor;
 		}
