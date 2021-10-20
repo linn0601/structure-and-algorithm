@@ -168,4 +168,18 @@ public class ArrayList<E> {
 		throw new IllegalArgumentException("参数非法");
 	}
 
+	public void swap(int i, int j) {
+		if (i >= size || i < 0) {
+			throw new IndexOutOfBoundsException("Index: " + i + ", Size: " + size);
+		}
+
+		if (j >= size || j < 0) {
+			throw new IndexOutOfBoundsException("Index: " + j + ", Size: " + size);
+		}
+
+		E temp = get(i);
+		data[i] = get(j);
+		data[j] = temp;
+	}
+
 }
