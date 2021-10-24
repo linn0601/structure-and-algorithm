@@ -52,6 +52,7 @@ public class MaxHeap<E extends Comparable<E>> {
 	}
 
 	public E extractMax() {
+		// 取出根元素和最后一个元素交互
 		E ret = findMax();
 
 		data.swap(0, data.size() - 1);
@@ -71,8 +72,10 @@ public class MaxHeap<E extends Comparable<E>> {
 		}
 	}
 
+	/**
+	 * 堆的下浮操作 1.下浮一般是根节点，对根节点
+	 */
 	private void siftDown(int k) {
-		// 取出根元素和最后一个元素交互
 		// 根元素和2个子节点比较，与较大的进行交换
 		while (leftChild(k) < data.size()) {
 			// 可能没有右孩子
@@ -101,7 +104,27 @@ public class MaxHeap<E extends Comparable<E>> {
 		}
 	}
 
+	// 堆只能取出最大元素
 	// replace 取出最大元素后，放入一个新的元素
+	public E replace(E e) {
 
+		E res = findMax();
+
+		data.set(0, e); // 将根元素设置为新的元素
+		siftDown(0); // 下浮，根元素找到自己梭子的位置
+
+		return res;
+	}
+
+	// 将数据整理成堆等形状
+	// 将当前数组看作完全二叉树，从当前最后一个非叶子节点开始 最后一个非叶子节点 = parent(size-1) 开始进行下沉操作siftDown
+	// heapify 是将数组 调整为满足堆的完全二叉树
+	public MaxHeap(E[] arr) {
+		data = new ArrayList<>(arr);
+
+		for (int i = arr.length - 1; i >= 0; i--) {
+			siftDown(i);
+		}
+	}
 
 }

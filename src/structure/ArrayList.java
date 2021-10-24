@@ -14,6 +14,15 @@ public class ArrayList<E> {
 		this.data = (E[]) new Object[capacity];
 	}
 
+	public ArrayList(E[] arr) {
+		this.data = (E[]) new Object[arr.length];
+
+		for (int i = 0; i < arr.length; i++) {
+			data[i] = arr[i];
+			size = arr.length;
+		}
+	}
+
 	public ArrayList() {
 		this(DEFAULT_CAPACITY);
 	}
